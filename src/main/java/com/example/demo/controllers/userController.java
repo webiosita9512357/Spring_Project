@@ -1,13 +1,14 @@
-package com.example.demo.Controllers;
+package com.example.demo.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class TestController {
+public class userController {
 
     @GetMapping("/")
-    public String getHelloWorld() {
-        return "Hello World";
+    public String getUser() {
+        return "user edit twice";
     }
+
 }

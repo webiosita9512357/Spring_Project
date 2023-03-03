@@ -1,15 +1,23 @@
 package com.example.demo.entity;
 
-public class User {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Account {
 
     // attributes
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String lastName;
     private String email;
 
     // constructors
-    public User(Long id, String name, String lastName, String email) {
+    public Account(Long id, String name, String lastName, String email) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -17,13 +25,13 @@ public class User {
     }
 
     // default constructor
-    public User() {
+    public Account() {
     }
 
     // toString
     @Override
     public String toString() {
-        return "User{" +
+        return "Account{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +

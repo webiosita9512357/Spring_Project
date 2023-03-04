@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Account {
@@ -14,7 +17,11 @@ public class Account {
     private Long id;
     private String name;
     private String lastName;
+    @NotBlank(message = "Email is mandatory")
+    @Email(message = "Email is not valid")
     private String email;
+    @NotBlank(message = "Username is mandatory")
+    @Length(min = 5, message = "Username must be at least 5 characters long")
     private String userName;
 
     // constructors

@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.entity.Account;
 import com.example.demo.service.AccountService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class AccountController {
     }
 
     @PostMapping("/account")
-    public Account postUser(@RequestBody Account user) {
+    public Account postUser(@Valid @RequestBody Account user) {
         return accountService.saveAccount(user);
     }
 

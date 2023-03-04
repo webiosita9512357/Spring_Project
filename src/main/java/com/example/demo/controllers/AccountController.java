@@ -27,7 +27,6 @@ public class AccountController {
     public Account putUser(@PathVariable("id") Long id, @RequestBody Account user) {
         return accountService.updateAccount(id, user);
     }
-
     @GetMapping("/account/{id}")
     public Account getAccount(@PathVariable("id") Long id) {
         return accountService.getAccount(id);
@@ -36,6 +35,11 @@ public class AccountController {
     @GetMapping("/accounts")
     public List<Account> getAccounts() {
         return accountService.getAccounts();
+    }
+
+    @GetMapping("/account/searchUsers/{name}")
+    public List<Account> searchUsers(@PathVariable("name") String name) {
+        return accountService.searchByNameAccounts(name);
     }
 
     @DeleteMapping("/account/{id}")

@@ -15,13 +15,15 @@ public class Account {
     private String name;
     private String lastName;
     private String email;
+    private String userName;
 
     // constructors
-    public Account(Long id, String name, String lastName, String email) {
+    public Account(Long id, String name, String lastName, String email, String userName) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
+        this.userName = userName;
     }
 
     // default constructor
@@ -35,6 +37,7 @@ public class Account {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", username='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
@@ -70,5 +73,13 @@ public class Account {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

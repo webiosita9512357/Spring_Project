@@ -50,6 +50,15 @@ public class AccountServiceImpl implements AccountService {
             account.setEmail(user.getEmail());
         }
 
+        if (Objects.nonNull(user.getUserName()) && !"".equalsIgnoreCase(user.getUserName())) {
+            account.setUserName(user.getUserName());
+        }
+
         return accountRepository.save(account);
+    }
+
+    @Override
+    public List<Account> searchByNameAccounts(String name) {
+        return accountRepository.findByUserName(name);
     }
 }

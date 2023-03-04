@@ -14,4 +14,6 @@ public interface AccountService {
     public void deleteAccount(Long id);
 
     public Account updateAccount(Long id, Account user);
+
+    public List<Account> searchByNameAccounts(String name);
 }

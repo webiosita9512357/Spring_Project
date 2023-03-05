@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entity.Account;
+import com.example.demo.error.AccountAlreadyExistsException;
+import com.example.demo.error.AccountNotFoundException;
 import com.example.demo.service.AccountService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -23,7 +25,7 @@ public class AccountController {
     }
 
     @PostMapping("/account")
-    public Account postUser(@Valid @RequestBody Account user) {
+    public Account postUser(@Valid @RequestBody Account user) throws AccountAlreadyExistsException {
         return accountService.saveAccount(user);
     }
 
@@ -32,7 +34,7 @@ public class AccountController {
         return accountService.updateAccount(id, user);
     }
     @GetMapping("/account/{id}")
-    public Account getAccount(@PathVariable("id") Long id) {
+    public Account getAccount(@PathVariable("id") Long id) throws AccountNotFoundException {
         logger.info("In getAccount - AccountController");
         return accountService.getAccount(id);
     }
@@ -51,7 +53,7 @@ public class AccountController {
 
     @DeleteMapping("/account/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
-            accountService.getAccount(id);
+            accountService.deleteAccount(id);
             return "user deleted";
     }
 

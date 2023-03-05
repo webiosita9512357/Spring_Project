@@ -1,12 +1,15 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Account;
+import com.example.demo.error.AccountAlreadyExistsException;
+import com.example.demo.error.AccountNotFoundException;
 import com.example.demo.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -15,7 +18,11 @@ public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
 
     @Override
-    public Account saveAccount(Account user) {
+    public Account saveAccount(Account user) throws AccountAlreadyExistsException {
+        Optional<Account> account = Optional.ofNullable(accountRepository.findByUserNameOrEmail(user.getUserName(), user.getEmail()));
+        if (account.isPresent()) {
+            throw new AccountAlreadyExistsException("Account already exists for this username or email: " + user.getUserName() + " or " + user.getEmail());
+        }
         return accountRepository.save(user);
     }
 
@@ -25,12 +32,17 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account getAccount(Long id) {
-        return accountRepository.findById(id).get();
+    public Account getAccount(Long id) throws AccountNotFoundException {
+        Optional<Account> account =  accountRepository.findById(id);
+        if (account.isEmpty()) {
+            throw new AccountNotFoundException("Account not found for id: " + id);
+        }
+
+        return account.get();
     }
 
     @Override
-    public void deleteAccount(Long id) {
+        public void deleteAccount(Long id) {
         accountRepository.deleteById(id);
     }
 

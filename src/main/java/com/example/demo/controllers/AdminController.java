@@ -10,23 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/admin")
 @AllArgsConstructor
-public class AuthController {
-
-    private final AuthService authService;
-
-    @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) throws AccountAlreadyExistsException {
-        authService.signup(registerRequest);
-        return new ResponseEntity<>("Account created", HttpStatus.CREATED );
-
-    }
-
-    @PostMapping("/login")
-    public void login(@RequestBody LoginRequest loginRequest) {
-        authService.login(loginRequest);
-    }
+public class AdminController {
 
     @GetMapping("/hello")
     public String hello() {

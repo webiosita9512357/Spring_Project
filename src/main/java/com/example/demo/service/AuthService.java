@@ -27,7 +27,7 @@ public class AuthService {
     @Transactional
     public void signup(@NotNull RegisterRequest registerRequest) throws AccountAlreadyExistsException {
 
-        Optional<Account> foundAccount = accountRepository.findByUserNameOrEmail(registerRequest.getUserName(), registerRequest.getEmail());
+        Optional<Account> foundAccount = accountRepository.findByEmail(registerRequest.getEmail());
         if (foundAccount.isPresent()) {
             throw new AccountAlreadyExistsException("Username or email already exists");
         }
